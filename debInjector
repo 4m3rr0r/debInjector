@@ -35,6 +35,7 @@ fi
 if ! which debInjector > /dev/null;
 then 
     sudo cp debInjector /usr/local/bin/ > /dev/null;
+    sudo debinjector -h
     exit 1
 fi
 
