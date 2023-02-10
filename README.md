@@ -1,4 +1,4 @@
-# deb-njector
+# deb-injector
 
 DebInjector is a simple bash script that allows you to inject a bash payload into a Debian package.
 
