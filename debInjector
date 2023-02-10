@@ -35,11 +35,12 @@ fi
 if ! which debInjector > /dev/null;
 then 
     sudo cp debInjector /usr/local/bin/ > /dev/null;
+    exit 1
 fi
 
 if [[ ${1} == "-h" ]] || [[ ${1} == "--help" ]] 
 then 
-    echo "Usage: $0 -d debian_package -b bash_file"
+    echo "Usage: debInjector -d debian_package -b bash_file"
     echo ""
     echo -e " ${BULE} Inject bash scripts in debian packages. ${RESET} "
     echo ""
