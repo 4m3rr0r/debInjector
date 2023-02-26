@@ -41,7 +41,7 @@ fi
 
 if [[ ${1} == "-h" ]] || [[ ${1} == "--help" ]] 
 then 
-    echo "Usage: debInjector -d debian_package -b bash_file"
+    echo "Usage: ${0:2} -d debian_package -b bash_file"
     echo ""
     echo -e " ${BULE} Inject bash scripts in debian packages. ${RESET} "
     echo ""
