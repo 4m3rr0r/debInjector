@@ -22,7 +22,9 @@ DebInjector is a simple bash script that allows you to inject a bash payload int
       sudo debinjector -d package.deb -b payload.sh
       
       
-      
+[Click to view the video](https://drive.google.com/file/d/VIDEO_FILE_ID/view?usp=sharing)
+
+
  ## Contributions
 
 Contributions are always welcome! If you have an idea for a new feature or have found a bug, please open an issue.
