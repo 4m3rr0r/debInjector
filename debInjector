@@ -1,5 +1,4 @@
 #!/bin/bash
-# mv to /usr/local/bin
 
 RED1='\033[5;31m'
 RED='\033[1;31m'
